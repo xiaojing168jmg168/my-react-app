@@ -1,11 +1,26 @@
-import { useState } from "react";
-
+import { useState, useEffect } from "react";
+import { API_GET_DATA } from '../../global/constants';
 import Edit from "./components/Edit";
 import List from "./components/List";
 
 import "./index.css";
+//从api中拿到data, 然后set到data里面，然后传到home的listData
+async function fetchData(setData){
+    const res = await fetch(API_GET_DATA)
+    const { data } = await res.json()
+    console.log(data);
+   setData(data)
+}
+
 const Home = () => {
-  const [data, setData] = useState([1, 2, 3]);
+  const [data, setData] = useState([]);
+  
+  use
+  // useEffect will excuted if data has change 
+  useEffect(()=>{
+   fetchData(setData)
+  },[])
+
   return (
     <div className="app">
       <Edit add={setData} />

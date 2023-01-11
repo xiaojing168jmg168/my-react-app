@@ -18,7 +18,6 @@ const Edit = ({ add }) => {
     setTime(e.target.value);
   }
 
-  console.log(note, date, time);
   function addItem() {
     add(function (prevData) {
       return [
