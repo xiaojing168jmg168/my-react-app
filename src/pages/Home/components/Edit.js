@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { v4 } from "uuid";
-const Edit = ({ add }) => {
+const Edit = ({ add, submittingStatus }) => {
   // First set note for " ", then setnote to e.taget.value,
   // when input change, call noteChange
   const [note, setNote] = useState("");
@@ -19,6 +19,7 @@ const Edit = ({ add }) => {
   }
 
   function addItem() {
+    submittingStatus.current = true
     add(function (prevData) {
       return [
         

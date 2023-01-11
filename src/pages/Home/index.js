@@ -1,30 +1,47 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { API_GET_DATA } from '../../global/constants';
 import Edit from "./components/Edit";
 import List from "./components/List";
-
 import "./index.css";
+
 //从api中拿到data, 然后set到data里面，然后传到home的listData
-async function fetchData(setData){
+async function fetchData(setData) {
     const res = await fetch(API_GET_DATA)
     const { data } = await res.json()
-    console.log(data);
-   setData(data)
-}
-
+    setData(data)
+  }
+  
+  async function fetchSetData(data) {
+    await fetch(API_GET_DATA, {
+      method: "PUT",
+      headers: {
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify({ data })
+    })
+  }
 const Home = () => {
   const [data, setData] = useState([]);
+  //useRef 预防不小心改变数据库的状态
+  const submittingStatus = useRef(false);
   
-  use
   // useEffect will excuted if data has change 
   useEffect(()=>{
-   fetchData(setData)
-  },[])
+    if(!submittingStatus.current){
+        return
+    }
+   fetchSetData(data)
+   .then(data => submittingStatus.current = false)
+  },[data])
+
+  useEffect(()=>{
+    fetchData(setData)
+   },[])
 
   return (
     <div className="app">
-      <Edit add={setData} />
-      <List listDate={data} deleteData={setData} />
+      <Edit add={setData} submittingStatus={submittingStatus} />
+      <List listDate={data} deleteData={setData} submittingStatus={submittingStatus} />
     </div>
   );
 };

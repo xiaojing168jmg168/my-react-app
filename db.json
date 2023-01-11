@@ -1,8 +1,21 @@
 {
-    "posts": [
-      {
-        "data": [],
-        "id": "1"
-      }
-    ]
-  }
+  "posts": [
+    {
+      "data": [
+        {
+          "id": "abc7f7fe-bc41-426a-aedd-c114f2555409",
+          "note": "Monday go to school",
+          "date": "2023-01-08",
+          "time": "10:00"
+        },
+        {
+          "id": "75c363f8-08ee-4b7f-a464-3ab8f2906a27",
+          "note": "Sunday go to church",
+          "date": "2023-01-15",
+          "time": "08:21"
+        }
+      ],
+      "id": "1"
+    }
+  ]
+}
